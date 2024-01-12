@@ -9,13 +9,20 @@ class WeatherService
     if hash[:error]
       hash.to_json
     else
+      weather = hash[:current]
       { 
-        
+        last_updated: weather[:last_updated],
+        feels_like: weather[:feelslike_f],
+        humidity: weather[:humidity],
+        uvi: weather[:uv],
+        visibility: weather[:vis_miles],
+        condition: weather[:condition][:text],
+        icon: weather[:condition][:icon]
       }.to_json
     end
   end
 
-  def forecast
+  def forecast(lat, lon)
     response = conn.get("forecast.json?key=#{Rails.application.credentials.weatherapi[:key]}&q=#{lat},#{lon}")
     hash = JSON.parse(response.body, symbolize_names: true)
     if hash[:error]
