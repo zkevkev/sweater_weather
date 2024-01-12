@@ -14,4 +14,16 @@ class WeatherService
       }.to_json
     end
   end
+
+  def forecast
+    response = conn.get("forecast.json?key=#{Rails.application.credentials.weatherapi[:key]}&q=#{lat},#{lon}")
+    hash = JSON.parse(response.body, symbolize_names: true)
+    if hash[:error]
+      hash.to_json
+    else
+      { 
+        
+      }.to_json
+    end
+  end
 end

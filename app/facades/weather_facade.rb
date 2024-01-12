@@ -1,3 +1,3 @@
 class WeatherFacade
-
+  
 end

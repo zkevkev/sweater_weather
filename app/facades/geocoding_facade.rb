@@ -1,0 +1,3 @@
+class GeocodingFacade
+  
+end
