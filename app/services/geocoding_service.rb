@@ -5,8 +5,6 @@ class GeocodingService
 
   def get_lat_lng(city, state)
     response = conn.get("address?key=#{Rails.application.credentials.geocodingapi[:key]}&location=#{city},#{state}")
-    hash = JSON.parse(response.body, symbolize_names: true)
-    hash[:error]
-    hash.to_json
+    JSON.parse(response.body, symbolize_names: true)
   end
 end

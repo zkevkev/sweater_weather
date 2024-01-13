@@ -39,8 +39,8 @@ RSpec.describe WeatherFacade do
       weather = @facade.hourly_forecast(48.8567, 2.3508)
       expect(weather).to be_a(Array)
       expect(weather[0][:time]).to be_a(String)
-      expect(weather[3][:temperature]).to be_a(Float)
-      expect(weather[19][:conditions]).to be_a(String)
+      expect(weather[7][:temperature]).to be_a(Float)
+      expect(weather[15][:conditions]).to be_a(String)
       expect(weather[23][:icon]).to be_a(String)
     end
   end
