@@ -27,6 +27,8 @@ RSpec.describe "Forecast" do
     expect(current[:visibility]).to be_a(Float)
     expect(current[:condition]).to be_a(String)
     expect(current[:icon]).to be_a(String)
+    expect(current[:wind_dir]).to be nil
+    expect(current[:cloud]).to be nil
 
     daily = attributes[:daily_weather]
 
@@ -39,6 +41,8 @@ RSpec.describe "Forecast" do
       expect(day[:min_temp]).to be_a(Float)
       expect(day[:condition]).to be_a(String)
       expect(day[:icon]).to be_a(String)
+      expect(day[:maxwind_mph]).to be nil
+      expect(day[:totalprecip_in]).to be nil
     end
     expect(daily.length).to eq(5)
 
@@ -50,6 +54,8 @@ RSpec.describe "Forecast" do
       expect(hour[:temperature]).to be_a(Float)
       expect(hour[:conditions]).to be_a(String)
       expect(hour[:icon]).to be_a(String)
+      expect(hour[:pressure_mb]).to be nil
+      expect(hour[:windchill_f]).to be nil
     end
     expect(hourly.length).to eq(24)
   end
