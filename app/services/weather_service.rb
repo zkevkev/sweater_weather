@@ -15,15 +15,6 @@ class WeatherService
 
   def get_forecast_hourly(lat, lon)
     response = conn.get("forecast.json?key=#{Rails.application.credentials.weatherapi[:key]}&q=#{lat},#{lon}&days=0")
-    JSON.parse(response.body, symbolize_names: true)
-    # weather = hash[:forecast][:forecastday].first[:hour]
-    # weather.map do |hour|
-    #   { 
-    #     time: hour[:time].split(' ')[1],
-    #     temperature: hour[:temp_f],
-    #     conditions: hour[:condition][:text],
-    #     icon: hour[:condition][:icon]
-    #   }
-    # end    
+    JSON.parse(response.body, symbolize_names: true)   
   end
 end

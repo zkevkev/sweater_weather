@@ -33,4 +33,15 @@ RSpec.describe WeatherFacade do
       expect(weather[4][:icon]).to be_a(String)
     end
   end
+
+  describe '#hourly_forecast' do
+    it 'returns a nested array of weather data' do
+      weather = @facade.hourly_forecast(48.8567, 2.3508)
+      expect(weather).to be_a(Array)
+      expect(weather[0][:time]).to be_a(String)
+      expect(weather[3][:temperature]).to be_a(Float)
+      expect(weather[19][:conditions]).to be_a(String)
+      expect(weather[23][:icon]).to be_a(String)
+    end
+  end
 end

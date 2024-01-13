@@ -29,4 +29,17 @@ class WeatherFacade
       }
     end
   end
+
+  def hourly_forecast(lat, lon)
+    service = WeatherService.new
+    weather = service.get_forecast_hourly(lat, lon)[:forecast][:forecastday].first[:hour]
+    weather.map do |hour|
+      { 
+        time: hour[:time].split(' ')[1],
+        temperature: hour[:temp_f],
+        conditions: hour[:condition][:text],
+        icon: hour[:condition][:icon]
+      }
+    end
+  end
 end
