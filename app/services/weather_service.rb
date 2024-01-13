@@ -3,22 +3,12 @@ class WeatherService
     Faraday.new(url: "http://api.weatherapi.com/v1/")
   end
 
-  def current_weather(lat, lon)
+  def get_current_weather(lat, lon)
     response = conn.get("current.json?key=#{Rails.application.credentials.weatherapi[:key]}&q=#{lat},#{lon}")
     hash = JSON.parse(response.body, symbolize_names: true)
-    # weather = hash[:current]
-    # { 
-    #   last_updated: weather[:last_updated],
-    #   feels_like: weather[:feelslike_f],
-    #   humidity: weather[:humidity],
-    #   uvi: weather[:uv],
-    #   visibility: weather[:vis_miles],
-    #   condition: weather[:condition][:text],
-    #   icon: weather[:condition][:icon]
-    # }
   end
 
-  def forecast_daily(lat, lon)
+  def get_forecast_daily(lat, lon)
     response = conn.get("forecast.json?key=#{Rails.application.credentials.weatherapi[:key]}&q=#{lat},#{lon}&days=5")
     hash = JSON.parse(response.body, symbolize_names: true)
     # weather = hash[:forecast][:forecastday]
@@ -35,7 +25,7 @@ class WeatherService
     # end
   end
 
-  def forecast_hourly(lat, lon)
+  def get_forecast_hourly(lat, lon)
     response = conn.get("forecast.json?key=#{Rails.application.credentials.weatherapi[:key]}&q=#{lat},#{lon}&days=0")
     hash = JSON.parse(response.body, symbolize_names: true)
     # weather = hash[:forecast][:forecastday].first[:hour]

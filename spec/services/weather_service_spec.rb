@@ -11,9 +11,9 @@ RSpec.describe WeatherService do
     end
   end
 
-  describe '#current_weather' do
+  describe '#get_current_weather' do
     it 'returns a nested hash of weather data' do
-      weather = @service.current_weather(48.8567, 2.3508)
+      weather = @service.get_current_weather(48.8567, 2.3508)
       current = weather[:current]
       expect(weather).to be_a(Hash)
       expect(current).to be_a(Hash)
@@ -27,9 +27,9 @@ RSpec.describe WeatherService do
     end
   end
 
-  describe '#forecast_daily' do
+  describe '#get_forecast_daily' do
     it 'returns a nested hash of weather data for each day' do
-      weather = @service.forecast_daily(48.8567, 2.3508)
+      weather = @service.get_forecast_daily(48.8567, 2.3508)
       daily = weather[:forecast][:forecastday]
       expect(weather).to be_a(Hash)
       expect(daily).to be_a(Array)
@@ -43,9 +43,9 @@ RSpec.describe WeatherService do
     end
   end
 
-  describe '#forecast_hourly' do
+  describe '#get_forecast_hourly' do
     it 'returns a nested hash of weather data for each day' do
-      weather = @service.forecast_daily(48.8567, 2.3508)
+      weather = @service.get_forecast_hourly(48.8567, 2.3508)
       hourly = weather[:forecast][:forecastday].first[:hour]
       expect(weather).to be_a(Hash)
       expect(hourly).to be_a(Array)
