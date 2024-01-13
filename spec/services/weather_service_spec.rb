@@ -18,6 +18,7 @@ RSpec.describe WeatherService do
       expect(weather).to be_a(Hash)
       expect(current).to be_a(Hash)
       expect(current[:last_updated]).to be_a(String)
+      expect(current[:temp_f]).to be_a(Float)
       expect(current[:feelslike_f]).to be_a(Float)
       expect(current[:humidity]).to be_a(Integer)
       expect(current[:uv]).to be_a(Float)
