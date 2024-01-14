@@ -6,8 +6,12 @@ RSpec.describe "Munchies" do
 
     expect(response).to be_successful
 
-    data = JSON.parse(response.body, symbolize_names: true)[:data]
-
+    response = JSON.parse(response.body, symbolize_names: true)
+    
+    expect(response).to be_a(Hash)
+    
+    data = response[:data]
+    
     expect(data).to be_a(Hash)
     expect(data[:id]).to be nil
     expect(data[:type]).to eq('munchie')
