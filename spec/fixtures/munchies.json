@@ -1,0 +1,19 @@
+{
+    "data": {
+        "id": null,
+        "type": "munchie",
+        "attributes": {
+            "destination_city": "denver, co",
+            "forecast": {
+                "summary": "Light snow",
+                "temperature": -4.0
+            },
+            "restaurant": {
+                "name": "Vinny and Marie’s Italian Street Food",
+                "address": "Denver, CO 80238",
+                "rating": 5.0,
+                "reviews": 6
+            }
+        }
+    }
+}
