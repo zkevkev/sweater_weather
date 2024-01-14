@@ -42,4 +42,13 @@ class WeatherFacade
       }
     end
   end
+
+  def current_weather_short(lat, lon)
+    service = WeatherService.new
+    weather = service.get_current_weather(lat, lon)[:current]
+    {
+      summary: weather[:condition][:text],
+      temperature: weather[:temp_f]
+    }
+  end
 end

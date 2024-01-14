@@ -44,4 +44,13 @@ RSpec.describe WeatherFacade do
       expect(weather[23][:icon]).to be_a(String)
     end
   end
+
+  describe '#current_weather_short' do
+    it 'returns a nested hash of abbreviated weather data' do
+      weather = @facade.current_weather_short(48.8567, 2.3508)
+      expect(weather).to be_a(Hash)
+      expect(weather[:summary]).to be_a(String)
+      expect(weather[:temperature]).to be_a(Float)
+    end
+  end
 end
