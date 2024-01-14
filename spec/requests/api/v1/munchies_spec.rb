@@ -2,15 +2,15 @@ require 'rails_helper'
 
 RSpec.describe "Munchies" do
   it "get request for /munchies" do
-    get '/api/v1/munchies', params: { location: 'pueblo,co', food: 'italian' }
+    get '/api/v1/munchies', params: { location: 'denver,co', food: 'italian' }
 
     expect(response).to be_successful
 
-    response = JSON.parse(response.body, symbolize_names: true)
+    munchies = JSON.parse(response.body, symbolize_names: true)
     
-    expect(response).to be_a(Hash)
+    expect(munchies).to be_a(Hash)
     
-    data = response[:data]
+    data = munchies[:data]
     
     expect(data).to be_a(Hash)
     expect(data[:id]).to be nil
@@ -22,7 +22,7 @@ RSpec.describe "Munchies" do
     expect(attributes[:destination_city]).to be_a(String)
     expect(attributes[:forecast]).to be_a(Hash)
     expect(attributes[:forecast][:summary]).to be_a(String)
-    expect(attributes[:forecast][:temperature]).to be_a(String)
+    expect(attributes[:forecast][:temperature]).to be_a(Float)
 
     restaurant = attributes[:restaurant]
 

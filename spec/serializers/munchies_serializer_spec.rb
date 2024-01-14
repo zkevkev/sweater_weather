@@ -8,7 +8,7 @@ RSpec.describe MunchiesSerializer do
   describe '#serialize_munchies' do
     it 'returns a nested hash of weather and restaurant data for a location' do
       response = @serializer.serialize_munchies(39.74001, -104.99202, 'italian')
-      munchies = JSON.parse(response, symbolize_names: true)
+      munchies = weather = JSON.parse(response, symbolize_names: true)
 
       expect(munchies).to be_a(Hash)
 
