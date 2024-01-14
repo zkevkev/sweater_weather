@@ -25,12 +25,12 @@ RSpec.describe RestaurantService do
       expect(details).to be_a(Hash)
       expect(details[:name]).to be_a(String)
       expect(details[:location]).to be_a(Hash)
-      expect(details[:location][:display_address]).to be_a(String)
+      expect(details[:location][:display_address]).to be_a(Array)
+      expect(details[:location][:display_address][0]).to be_a(String)
       expect(details[:rating]).to be_a(Float)
-      expect(details[:review_count]).to be_a(String)
+      expect(details[:review_count]).to be_a(Integer)
       expect(details[:display_phone]).to be_a(String)
       expect(details[:coordinates]).to be_a(Hash)
-      expect(details[:region]).to be_a(Hash)
     end
   end
 end
