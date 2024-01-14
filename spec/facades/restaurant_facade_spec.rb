@@ -10,8 +10,8 @@ RSpec.describe RestaurantFacade do
       restaurant = @facade.restaurant_search(39.74001, -104.99202, 'italian')
 
       expect(restaurant).to be_a(Hash)
-      expect(restaurant[:name]).to be_a(Hash)
-      expect(restaurant[:address]).to be_a(Hash)
+      expect(restaurant[:name]).to be_a(String)
+      expect(restaurant[:address]).to be_a(String)
       expect(restaurant[:rating]).to be_a(Float)
       expect(restaurant[:reviews]).to be_a(Integer)
       expect(restaurant[:display_phone]).to be nil
