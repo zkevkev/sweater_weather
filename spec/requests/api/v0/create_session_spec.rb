@@ -42,7 +42,7 @@ RSpec.describe 'post request for /sessions' do
 
       expect(response).to_not be_successful
       expect(response.status).to eq(400)
-      expect(response.errors).to eq("Invalid credentials, please try again")
+      expect(response.errors).to eq('Invalid credentials, please try again')
     end
   end
 end
