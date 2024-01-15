@@ -1,18 +1,17 @@
 require 'rails_helper'
 
-RSpec.describe 'post request for /user' do
+RSpec.describe 'post request for /sessions' do
   context 'with valid parameters' do
-    it 'creates a new user and returns their api key' do
+    it "returns the appropriate user's api key and email" do
       user_info = {
         email: 'example@example.com',
         password: 'password123',
-        password_confirmation: 'password123'
       }.to_json
 
-      post '/api/v0/user', params: user_info, headers: { 'Content-Type' => 'application/json', 'Accept' => 'application/json' }
+      post '/api/v0/sessions', params: user_info, headers: { 'Content-Type' => 'application/json', 'Accept' => 'application/json' }
 
       expect(response).to be_successful
-      expect(response.status).to eq(201)
+      expect(response.status).to eq(200)
 
       parsed = JSON.parse(response.body, symbolize_names: true)
 
@@ -35,16 +34,15 @@ RSpec.describe 'post request for /user' do
   context 'with invalid parameters' do
     it 'returns an appropriate error' do
       user_info = {
-        email: 'example@example.com',
+        email: '',
         password: 'password123',
-        password_confirmation: 'password'
       }.to_json
 
       post '/api/v0/user', params: user_info, headers: { 'Content-Type' => 'application/json', 'Accept' => 'application/json' }
 
       expect(response).to_not be_successful
       expect(response.status).to eq(400)
-      expect(response.errors).to eq("doesn't match Password")
+      expect(response.errors).to eq("Invalid credentials, please try again")
     end
   end
 end
