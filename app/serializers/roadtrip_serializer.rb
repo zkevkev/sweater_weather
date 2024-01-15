@@ -12,13 +12,13 @@ class RoadtripSerializer
         "id": nil,
         "type": "road_trip",
         "attributes": {
-          "start_city": from,
-          "end_city": to,
+          "start_city": from.split(',')[0],
+          "end_city": to.split(',')[0],
           "travel_time": travel_time[:formatted],
           "weather_at_eta": {
             "datetime": travel_time[:arrival_time],
-            "temperature": forecast[(travel_time[:arrival_time][0..1][:temperature])],
-            "condition": forecast[(travel_time[:arrival_time][0..1])[:conditions]]
+            "temperature": forecast[(travel_time[:arrival_time][0..1]).to_i][:temperature],
+            "condition": forecast[(travel_time[:arrival_time][0..1]).to_i][:conditions]
           }
         }
       }
