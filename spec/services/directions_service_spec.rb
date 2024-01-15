@@ -13,13 +13,9 @@ RSpec.describe DirectionsService do
 
   describe '#get_directions' do
     it 'returns route info between two locations' do
-      # start city
-      # end city
-      # travel time
-      # 
-        # datetime
-        # temperature
-        # condition
+      response = @service.get_directions('Cincinatti,OH', 'Chicago,IL')
+      travel_time = response[:route][:formattedTime]
+      expect(travel_time).to be_a(String)
     end
   end
 end
