@@ -1,4 +1,4 @@
-class GeocodingService
+class DirectionsService
   def conn
     Faraday.new(url: "https://www.mapquestapi.com/directions/v2/")
   end
