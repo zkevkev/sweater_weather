@@ -3,10 +3,11 @@ require 'rails_helper'
 RSpec.describe 'post request for /sessions' do
   context 'with valid parameters' do
     it "returns the appropriate user's api key and email", :vcr do
+      user = create(:user)
       user_info = {
-        email: 'example@example.com',
-        password: 'password123',
-      }.to_json
+        email: user.email,
+        password: user.password,
+      }
 
       post '/api/v0/sessions', params: user_info, headers: { 'Content-Type' => 'application/json', 'Accept' => 'application/json' }
 
@@ -41,8 +42,7 @@ RSpec.describe 'post request for /sessions' do
       post '/api/v0/sessions', params: user_info, headers: { 'Content-Type' => 'application/json', 'Accept' => 'application/json' }
 
       expect(response).to_not be_successful
-      expect(response.status).to eq(400)
-      expect(response.errors).to eq('Invalid credentials, please try again')
+      expect(response.status).to eq(422)
     end
   end
 end

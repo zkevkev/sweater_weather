@@ -1,7 +1,6 @@
 class Api::V0::SessionsController < ApplicationController
   def create
-    data = JSON.parse(request.body.read)
-    user = User.find_by(email: user_params(data)[:email])
+    user = User.find_by(email: user_params[:email])
 
     if user
       render json: UserSerializer.new(user)
@@ -12,12 +11,8 @@ class Api::V0::SessionsController < ApplicationController
 
   private
 
-  def user_params(data)
-    # params.require(:user).permit(:email, :password, :password_confirmation)
-
-    user_params = {
-      email: data['email'],
-      password: data['password'],
-    }
+  def user_params
+    payload = JSON.parse(request.body.read, symbolize_names: true)
+    ActionController::Parameters.new(payload).permit(:email, :password)
   end
 end

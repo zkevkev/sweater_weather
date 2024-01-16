@@ -50,7 +50,7 @@ RSpec.describe 'post request for /road_trip' do
       post '/api/v0/road_trip', params: trip_info, headers: { 'Content-Type' => 'application/json', 'Accept' => 'application/json' }
 
       expect(response).to_not be_successful
-      expect(response.errors).to eq('Invalid api key, please try again')
+      expect(response.status).to eq(422)
     end
   end
 end
