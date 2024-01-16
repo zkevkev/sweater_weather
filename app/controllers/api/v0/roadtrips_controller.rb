@@ -1,11 +1,13 @@
 class Api::V0::RoadtripsController < ApplicationController
   def create
-    data = JSON.parse(request.body.read)
-    roadtrip_data = roadtrip_params(data)
-    user = User.find_by(api_key: roadtrip_data[:api_key])
-
+    user = User.find_by(api_key: roadtrip_params[:api_key])
     if user
-      render json: RoadtripSerializer.new.serialize_roadtrip(roadtrip_data[:origin], roadtrip_data[:destination])
+      roadtrip_info = RoadtripSerializer.new.serialize_roadtrip(roadtrip_params[:origin], roadtrip_params[:destination])
+      if roadtrip_info.is_a?(Hash) && roadtrip_info[:error].present?
+        render json: { errors: 'Impossible' }, status: :unprocessable_entity
+      else
+        render json: roadtrip_info
+      end
     # elsif a field is left blank (move above)
     else
       render json: { errors: 'Invalid api key, please try again' }, status: :unprocessable_entity
@@ -13,12 +15,9 @@ class Api::V0::RoadtripsController < ApplicationController
   end
 
   private
-
-  def roadtrip_params(data)
-    roadtrip_params = {
-      origin: data['origin'],
-      destination: data['destination'],
-      api_key: data['api_key']
-    }
+  
+  def roadtrip_params
+    payload = JSON.parse(request.body.read, symbolize_names: true)
+    ActionController::Parameters.new(payload).permit(:origin, :destination, :api_key)
   end
 end

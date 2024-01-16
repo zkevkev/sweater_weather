@@ -54,4 +54,20 @@ RSpec.describe 'post request for /road_trip' do
       expect(response.status).to eq(422)
     end
   end
+
+  context 'with impossible route' do
+    it 'returns an error that the trip is impossible', :vcr do
+      user = create(:user)
+      trip_info = {
+        origin: "Cincinatti,OH",
+        destination: "London,UK",
+        api_key: user.api_key
+      }
+
+      post '/api/v0/road_trip', params: trip_info.to_json, headers: { 'Content-Type' => 'application/json', 'Accept' => 'application/json' }
+
+      expect(response).to_not be_successful
+      expect(response.status).to eq(422)
+    end
+  end
 end
