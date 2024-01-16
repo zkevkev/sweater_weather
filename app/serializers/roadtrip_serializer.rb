@@ -1,4 +1,5 @@
 class RoadtripSerializer
+  # refactor this to put logic into the facade, this has way too much
   def serialize_roadtrip(from, to)
     directions_facade = DirectionsFacade.new
     weather_facade = WeatherFacade.new

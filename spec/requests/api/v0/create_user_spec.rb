@@ -5,12 +5,12 @@ RSpec.describe 'post request for /user' do
     it 'creates a new user and returns their api key', :vcr do
       user = build(:user)
       user_info = {
-        email: user.email,
-        password: user.password,
-        password_confirmation: user.password_confirmation
+        "email": user.email,
+        "password": user.password,
+        "password_confirmation": user.password_confirmation
       }
 
-      post '/api/v0/users', params: user_info, headers: { 'Content-Type' => 'application/json', 'Accept' => 'application/json' }
+      post '/api/v0/users', params: user_info.to_json, headers: { 'Content-Type' => 'application/json', 'Accept' => 'application/json' }
 
       expect(response).to be_successful
       expect(response.status).to eq(201)
@@ -22,8 +22,8 @@ RSpec.describe 'post request for /user' do
       data = parsed[:data]
 
       expect(data).to be_a(Hash)
-      expect(data[:type]).to eq('users')
-      expect(data[:id]).to be_a(Integer)
+      expect(data[:type]).to eq('user')
+      expect(data[:id]).to be_a(String)
 
       attributes = data[:attributes]
 
