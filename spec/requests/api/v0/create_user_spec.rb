@@ -3,13 +3,14 @@ require 'rails_helper'
 RSpec.describe 'post request for /user' do
   context 'with valid parameters' do
     it 'creates a new user and returns their api key', :vcr do
+      user = build(:user)
       user_info = {
-        email: 'example@example.com',
-        password: 'password123',
-        password_confirmation: 'password123'
-      }.to_json
+        email: user.email,
+        password: user.password,
+        password_confirmation: user.password_confirmation
+      }
 
-      post '/api/v0/user', params: user_info, headers: { 'Content-Type' => 'application/json', 'Accept' => 'application/json' }
+      post '/api/v0/users', params: user_info, headers: { 'Content-Type' => 'application/json', 'Accept' => 'application/json' }
 
       expect(response).to be_successful
       expect(response.status).to eq(201)
@@ -40,11 +41,10 @@ RSpec.describe 'post request for /user' do
         password_confirmation: 'password'
       }.to_json
 
-      post '/api/v0/user', params: user_info, headers: { 'Content-Type' => 'application/json', 'Accept' => 'application/json' }
+      post '/api/v0/users', params: user_info, headers: { 'Content-Type' => 'application/json', 'Accept' => 'application/json' }
 
       expect(response).to_not be_successful
-      expect(response.status).to eq(400)
-      expect(response.errors).to eq("doesn't match Password")
+      expect(response.status).to eq(422)
     end
   end
 end

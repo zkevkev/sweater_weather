@@ -1,6 +1,7 @@
 class Api::V0::UsersController < ApplicationController
   def create
-    data = JSON.parse(request.body.read)
+    data = request.body.read
+    require 'pry'; binding.pry
     user = User.new(user_params(data))
     user.api_key = SecureRandom.hex(16)
 
@@ -14,7 +15,7 @@ class Api::V0::UsersController < ApplicationController
   private
 
   def user_params(data)
-    # params.require(:user).permit(:email, :password, :password_confirmation)
+    # params.permit(:email, :password, :password_confirmation)
 
     user_params = {
       email: data['email'],

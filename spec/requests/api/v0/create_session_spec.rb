@@ -38,7 +38,7 @@ RSpec.describe 'post request for /sessions' do
         password: 'password123',
       }.to_json
 
-      post '/api/v0/user', params: user_info, headers: { 'Content-Type' => 'application/json', 'Accept' => 'application/json' }
+      post '/api/v0/sessions', params: user_info, headers: { 'Content-Type' => 'application/json', 'Accept' => 'application/json' }
 
       expect(response).to_not be_successful
       expect(response.status).to eq(400)
