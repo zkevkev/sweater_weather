@@ -6,13 +6,13 @@ RSpec.describe GeocodingService do
   end
 
   describe '#conn' do
-    it 'establishes a connection with mapquest geocoding API' do
+    it 'establishes a connection with mapquest geocoding API', :vcr do
       expect(@service.conn).to be_a(Faraday::Connection)
     end
   end
 
   describe '#get_lat_lng' do
-    it 'returns a nested hash of location data, including lat and lon' do
+    it 'returns a nested hash of location data, including lat and lon', :vcr do
       response = @service.get_lat_lng("Denver", "CO")
       lat_lon = response[:results].first[:locations].first[:latLng]
       expect(lat_lon[:lat]).to eq(39.74001)

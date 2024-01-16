@@ -6,8 +6,9 @@ RSpec.describe RoadtripSerializer do
   end
 
   describe '#serialize_roadtrip' do
-    it 'returns a nested hash of roadtrip data' do
+    it 'returns a nested hash of roadtrip data', :vcr do
       response = @serializer.serialize_roadtrip('Cincinatti,OH', 'Chicago,IL')
+      response = JSON.parse(response, symbolize_names: true)
 
       expect(response).to be_a(Hash)
 

@@ -6,7 +6,7 @@ RSpec.describe WeatherSerializer do
   end
 
   describe '#serialize_weather' do
-    it 'returns a nested hash of weather data' do
+    it 'returns a nested hash of weather data', :vcr do
       response = @serializer.serialize_weather(48.8567, 2.3508)
       weather = JSON.parse(response, symbolize_names: true)
       data = weather[:data]

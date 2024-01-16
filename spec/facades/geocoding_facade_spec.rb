@@ -6,7 +6,7 @@ RSpec.describe GeocodingFacade do
   end
 
   describe '#lat_lon' do
-    it 'returns a hash of latitude and longitude for a location' do
+    it 'returns a hash of latitude and longitude for a location', :vcr do
       hash = @facade.lat_lon('Denver', 'CO')
       expect(hash[:lat]).to eq(39.74001)
       expect(hash[:lon]).to eq(-104.99202)

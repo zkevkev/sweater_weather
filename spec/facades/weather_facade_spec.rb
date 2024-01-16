@@ -6,7 +6,7 @@ RSpec.describe WeatherFacade do
   end
 
   describe '#current_weather' do
-    it 'returns a nested hash of weather data' do
+    it 'returns a nested hash of weather data', :vcr do
       weather = @facade.current_weather(48.8567, 2.3508)
       expect(weather).to be_a(Hash)
       expect(weather[:last_updated]).to be_a(String)
@@ -21,7 +21,7 @@ RSpec.describe WeatherFacade do
   end
 
   describe '#daily_forecast' do
-    it 'returns a nested array of weather data' do
+    it 'returns a nested array of weather data', :vcr do
       weather = @facade.daily_forecast(48.8567, 2.3508)
       expect(weather).to be_a(Array)
       expect(weather[0][:date]).to be_a(String)
@@ -35,7 +35,7 @@ RSpec.describe WeatherFacade do
   end
 
   describe '#hourly_forecast' do
-    it 'returns a nested array of weather data' do
+    it 'returns a nested array of weather data', :vcr do
       weather = @facade.hourly_forecast(48.8567, 2.3508)
       expect(weather).to be_a(Array)
       expect(weather[0][:time]).to be_a(String)

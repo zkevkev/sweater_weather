@@ -6,13 +6,13 @@ RSpec.describe WeatherService do
   end
 
   describe '#conn' do
-    it 'establishes a connection with weather API' do
+    it 'establishes a connection with weather API', :vcr do
       expect(@service.conn).to be_a(Faraday::Connection)
     end
   end
 
   describe '#get_current_weather' do
-    it 'returns a nested hash of weather data' do
+    it 'returns a nested hash of weather data', :vcr do
       weather = @service.get_current_weather(48.8567, 2.3508)
       current = weather[:current]
       expect(weather).to be_a(Hash)
@@ -29,7 +29,7 @@ RSpec.describe WeatherService do
   end
 
   describe '#get_forecast_daily' do
-    it 'returns a nested hash of weather data for each day' do
+    it 'returns a nested hash of weather data for each day', :vcr do
       weather = @service.get_forecast_daily(48.8567, 2.3508)
       daily = weather[:forecast][:forecastday]
       expect(weather).to be_a(Hash)
@@ -45,7 +45,7 @@ RSpec.describe WeatherService do
   end
 
   describe '#get_forecast_hourly' do
-    it 'returns a nested hash of weather data for each day' do
+    it 'returns a nested hash of weather data for each day', :vcr do
       weather = @service.get_forecast_hourly(48.8567, 2.3508)
       hourly = weather[:forecast][:forecastday].first[:hour]
       expect(weather).to be_a(Hash)

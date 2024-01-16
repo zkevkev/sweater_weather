@@ -6,7 +6,7 @@ RSpec.describe DirectionsFacade do
   end
 
   describe '#travel_time' do
-    it 'returns the total travel time for a trip (formatted and unformatted)' do
+    it 'returns the total travel time for a trip (formatted and unformatted)', :vcr do
       response = @facade.travel_time('Cincinatti,OH', 'Chicago,IL')
       expect(response).to be_a(Hash)
       expect(response[:arrival_time]).to be_a(String)

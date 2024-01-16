@@ -40,7 +40,7 @@ RSpec.describe 'post request for /road_trip' do
   end
 
   context 'with invalid api key' do
-    it 'returns an appropriate error' do
+    it 'returns an appropriate error', :vcr do
       trip_info = {
         origin: "Cincinatti,OH",
         destination: "Chicago,IL",

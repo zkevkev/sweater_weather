@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe 'post request for /sessions' do
   context 'with valid parameters' do
-    it "returns the appropriate user's api key and email" do
+    it "returns the appropriate user's api key and email", :vcr do
       user_info = {
         email: 'example@example.com',
         password: 'password123',
@@ -32,7 +32,7 @@ RSpec.describe 'post request for /sessions' do
   end
 
   context 'with invalid parameters' do
-    it 'returns an appropriate error' do
+    it 'returns an appropriate error', :vcr do
       user_info = {
         email: '',
         password: 'password123',

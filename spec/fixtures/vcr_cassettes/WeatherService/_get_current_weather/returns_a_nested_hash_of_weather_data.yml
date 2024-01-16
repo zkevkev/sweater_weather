@@ -1,0 +1,71 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: http://api.weatherapi.com/v1/current.json?key=a40b7a8012ff42098bf203051240501&q=48.8567,2.3508
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v2.9.0
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Tue, 16 Jan 2024 17:39:33 GMT
+      Content-Type:
+      - application/json
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Vary:
+      - Accept-Encoding
+      Server:
+      - BunnyCDN-IL1-845
+      Cdn-Pullzone:
+      - '93447'
+      Cdn-Uid:
+      - 8fa3a04a-75d9-4707-8056-b7b33c8ac7fe
+      Cdn-Requestcountrycode:
+      - US
+      Age:
+      - '0'
+      Cache-Control:
+      - public, max-age=180
+      Via:
+      - 1.1 varnish (Varnish/6.0)
+      X-Weatherapi-Qpm-Left:
+      - '4999873'
+      X-Varnish:
+      - '518064391'
+      Cdn-Proxyver:
+      - '1.04'
+      Cdn-Requestpullsuccess:
+      - 'True'
+      Cdn-Requestpullcode:
+      - '200'
+      Cdn-Cachedat:
+      - 01/16/2024 17:39:28
+      Cdn-Edgestorageid:
+      - '1068'
+      Cdn-Status:
+      - '200'
+      Cdn-Requestid:
+      - 9f1bf1de94a002d5d1c8d6826330564f
+      Cdn-Cache:
+      - HIT
+    body:
+      encoding: ASCII-8BIT
+      string: '{"location":{"name":"Paris","region":"Ile-de-France","country":"France","lat":48.86,"lon":2.35,"tz_id":"Europe/Paris","localtime_epoch":1705426729,"localtime":"2024-01-16
+        18:38"},"current":{"last_updated_epoch":1705426200,"last_updated":"2024-01-16
+        18:30","temp_c":0.0,"temp_f":32.0,"is_day":0,"condition":{"text":"Clear","icon":"//cdn.weatherapi.com/weather/64x64/night/113.png","code":1000},"wind_mph":4.3,"wind_kph":6.8,"wind_degree":130,"wind_dir":"SE","pressure_mb":1007.0,"pressure_in":29.74,"precip_mm":0.0,"precip_in":0.0,"humidity":69,"cloud":0,"feelslike_c":-2.4,"feelslike_f":27.8,"vis_km":10.0,"vis_miles":6.0,"uv":1.0,"gust_mph":7.1,"gust_kph":11.4}}'
+  recorded_at: Tue, 16 Jan 2024 17:39:33 GMT
+recorded_with: VCR 6.2.0
