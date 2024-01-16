@@ -2,14 +2,15 @@ require 'rails_helper'
 
 RSpec.describe 'post request for /road_trip' do
   context 'with valid api key' do
-    it 'returns information about the new roadtrip' do
+    it 'returns information about the new roadtrip', :vcr do
+      user = create(:user)
       trip_info = {
         origin: "Cincinatti,OH",
         destination: "Chicago,IL",
-        api_key: "t1h2i3s4_i5s6_l7e8g9i10t11"
-      }.to_json
+        api_key: user.api_key
+      }
 
-      post '/api/v0/road_trip', params: trip_info, headers: { 'Content-Type' => 'application/json', 'Accept' => 'application/json' }
+      post '/api/v0/road_trip', params: trip_info.to_json, headers: { 'Content-Type' => 'application/json', 'Accept' => 'application/json' }
 
       expect(response).to be_successful
 
@@ -45,9 +46,9 @@ RSpec.describe 'post request for /road_trip' do
         origin: "Cincinatti,OH",
         destination: "Chicago,IL",
         api_key: ""
-      }.to_json
+      }
 
-      post '/api/v0/road_trip', params: trip_info, headers: { 'Content-Type' => 'application/json', 'Accept' => 'application/json' }
+      post '/api/v0/road_trip', params: trip_info.to_json, headers: { 'Content-Type' => 'application/json', 'Accept' => 'application/json' }
 
       expect(response).to_not be_successful
       expect(response.status).to eq(422)

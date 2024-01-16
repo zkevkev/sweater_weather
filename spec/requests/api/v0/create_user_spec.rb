@@ -39,9 +39,9 @@ RSpec.describe 'post request for /user' do
         email: 'example@example.com',
         password: 'password123',
         password_confirmation: 'password'
-      }.to_json
+      }
 
-      post '/api/v0/users', params: user_info, headers: { 'Content-Type' => 'application/json', 'Accept' => 'application/json' }
+      post '/api/v0/users', params: user_info.to_json, headers: { 'Content-Type' => 'application/json', 'Accept' => 'application/json' }
 
       expect(response).to_not be_successful
       expect(response.status).to eq(422)

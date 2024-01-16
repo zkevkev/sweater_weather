@@ -9,7 +9,7 @@ RSpec.describe 'post request for /sessions' do
         password: user.password,
       }
 
-      post '/api/v0/sessions', params: user_info, headers: { 'Content-Type' => 'application/json', 'Accept' => 'application/json' }
+      post '/api/v0/sessions', params: user_info.to_json, headers: { 'Content-Type' => 'application/json', 'Accept' => 'application/json' }
 
       expect(response).to be_successful
       expect(response.status).to eq(200)
@@ -21,8 +21,8 @@ RSpec.describe 'post request for /sessions' do
       data = parsed[:data]
 
       expect(data).to be_a(Hash)
-      expect(data[:type]).to eq('users')
-      expect(data[:id]).to be_a(Integer)
+      expect(data[:type]).to eq('user')
+      expect(data[:id]).to be_a(String)
 
       attributes = data[:attributes]
 
@@ -37,9 +37,9 @@ RSpec.describe 'post request for /sessions' do
       user_info = {
         email: '',
         password: 'password123',
-      }.to_json
+      }
 
-      post '/api/v0/sessions', params: user_info, headers: { 'Content-Type' => 'application/json', 'Accept' => 'application/json' }
+      post '/api/v0/sessions', params: user_info.to_json, headers: { 'Content-Type' => 'application/json', 'Accept' => 'application/json' }
 
       expect(response).to_not be_successful
       expect(response.status).to eq(422)

@@ -1,7 +1,6 @@
 class Api::V0::UsersController < ApplicationController
   def create
     user = User.new(user_params)
-    user.api_key = SecureRandom.hex(16)
 
     if user.save
       render json: UserSerializer.new(user), status: :created
